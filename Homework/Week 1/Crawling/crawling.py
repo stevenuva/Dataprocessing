@@ -58,8 +58,9 @@ def save_csv(filename, rows):
     with open(filename, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow([
-            'title', 'runtime', 'genre(s)', 'director(s)', 'writer(s)',
-            'actor(s)', 'rating(s)', 'number of rating(s)'
+            'title', 'year', 'runtime', 'genre(s)', 'director(s)', 
+            'writer(s)', 'actor(s)', 'rating(s)', 
+            'number of rating(s)'
         ])
 
         writer.writerows(rows)
