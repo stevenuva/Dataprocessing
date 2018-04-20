@@ -1,3 +1,3 @@
 # dataprocessing
-[Page](https://stevenuva.github.io/dataprocessing/)
+[Pages](https://stevenuva.github.io/dataprocessing/)
 
