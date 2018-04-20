@@ -1,5 +1,12 @@
+/**
+ *    Steven Kuhnen (10305882)
+ *    Data Processing: week 2
+ */
+
+// file to be used
 var file = "KNMI_20171231.txt"
 
+// load data from external file
 var txtFile = new XMLHttpRequest();
 txtFile.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -69,8 +76,8 @@ txtFile.onreadystatechange = function() {
 
         // array with months
         const months = ["January", "February", "March", "April", "May",
-                      "June", "July", "August", "September", "October",
-                      "November", "December"]
+                        "June", "July", "August", "September", "October",
+                        "November", "December"]
 
         // determine font
         graph.font = "12px Arial";
