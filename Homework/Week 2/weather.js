@@ -106,9 +106,9 @@ txtFile.onreadystatechange = function() {
 
         // draw temperatures on canvas element
         for (let k = 0; k <= lengthVisual; k++) {
-            graph.strokeText((minVisual + (roundTemp * k)) + "°C", graphRange[0]
-                              + padding, (graphRange[1] - ((lengthRange /
-                               lengthVisual) * k)))
+            graph.strokeText((minVisual + (roundTemp * k)) / 10 + "°C",
+                              graphRange[0] + padding, (graphRange[1] -
+                              ((lengthRange / lengthVisual) * k)))
         }
 
         // draw temperature label
