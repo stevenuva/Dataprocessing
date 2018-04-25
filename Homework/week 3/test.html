@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="style.css">
         <title>Jewish victims World War 2 per country</title>
-        <script type="text/javascript" src="d3/d3.v3.js"></script>
+        <script src="d3/d3.v3.js"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     </head>
 
     <body>
@@ -17,8 +18,8 @@
             var w = 800;
             var h = 400;
             var barPadding = 1;
-            var heightMargin = 75;
-            var widthMargin = 50;
+            var heightMargin = 100;
+            var widthMargin = 40;
 
             d3.json("Jewish_Victims_WW2.json", function(data){
             var completeData = Object.values(data)[0]
@@ -29,8 +30,6 @@
             var countryNames = completeData.map(function(d){
               return d["Country"];
             });
-
-
 
             var specificData = completeData.map(function(d) {
                 return d["Average%"].replace(/(%)/, "");
@@ -62,35 +61,49 @@
                               .scale(axisScale)
                               .orient("left")
                               .ticks(10);
-
+            var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-20, 0])
+              .html(function(d, i) {
+                return "<strong>" + countryNames[i] + ":</strong> <span style='color:red'>" + specificData[i]+ "%</span>";
+              })
             // create SVG element
             var svg = d3.select("body")
                         .append("svg")
                         .attr("width", w + (2 * widthMargin))
                         .attr("height", h + (2 *heightMargin));
 
+            svg.call(tip);
+
             svg.selectAll("rect")
-               .data(specificData)
-               .enter()
-               .append("rect")
+                .data(specificData)
+              .enter().append("rect")
+               .attr("class", "bar")
                .attr("x", function(d, i) {
                     return (i * (w / specificData.length)) + widthMargin;
                })
+               .attr("width", w / specificData.length - barPadding)
                .attr("y", function(d) {
                     return h + heightMargin - yScale((d));
                })
-               .attr("width", w / specificData.length - barPadding)
                .attr("height", function(d) {
                     return yScale(d);
                })
                .attr("fill", function(d) {
-                    return "rgb(" + (d * 10) + ", 0, 0)";
-               });
+                   return "rgb(" + (Math.round(255 - d)) + ", 0, 0)";
+                 })
+               .on("mouseover", tip.show)
+               .on("mouseover", tip.show)
+
 
             svg.selectAll("text")
                .data(specificData)
                .enter()
                .append("text")
+               .transition().duration(h)
+               .delay(function(d, i){
+                return i * heightMargin;
+              })
                .text(function(d) {
                     return d + "%";
                })
@@ -99,11 +112,7 @@
                })
                .attr("y", function(d) {
                     return h + heightMargin - yScale(d) - 1;
-               })
-               .attr("font-family", "sans-serif")
-               .attr("font-weight", "bold")
-               .attr("font-size", "11px")
-               .attr("fill", "black");
+               });
 
             // create X axis
             svg.append("g")
@@ -113,11 +122,11 @@
                 .selectAll("text")
                 .style("text-anchor", "end")
                 .attr("dx", "-.10em")
-                .attr("dy", ".20em")
+                .attr("dy", ".70em")
                 .attr("transform", "rotate(-65)")
 
 
-            //Create Y axis
+            // create Y axis
             svg.append("g")
                 .attr("class", "axis")
                 .attr("transform", "translate(" + widthMargin + "," +
@@ -125,4 +134,5 @@
                 .call(yAxis);
             });
         </script>
+        <!-- <iframe width="0" height="0" src="https://www.youtube.com/embed/XNSsv86lsok?autoplay=1" ></iframe> -->
 </html>
