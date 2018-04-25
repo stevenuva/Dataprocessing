@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Jewish victims World War 2 per country</title>
+        <script type="text/javascript" src="d3/d3.v3.js"></script>
+    </head>
+
+    <body>
+        <h1>Jewish casualties per country during WW2 in percentages</h1>
+        <h3>Steven Kuhnen (10305882)</h3>
+        <h4>Dataprocessing week 3: Bar chart</h4>
+        <script type="text/javascript">
+
+            //Width and height and padding
+            var w = 800;
+            var h = 400;
+            var barPadding = 1;
+            var heightMargin = 75;
+            var widthMargin = 50;
+
+            d3.json("Jewish_Victims_WW2.json", function(data){
+            var completeData = Object.values(data)[0]
+            completeData.sort(function(x, y){
+                return d3.descending(x["Average%"], y["Average%"]);
+            })
+
+            var countryNames = completeData.map(function(d){
+              return d["Country"];
+            });
+
+
+
+            var specificData = completeData.map(function(d) {
+                return d["Average%"].replace(/(%)/, "");
+            });
+
+            // create x scale
+           var xScale = d3.scale.linear()
+                                .domain([0, specificData.length])
+                                .range([widthMargin, w + widthMargin]);
+
+            // create y scale
+            var yScale = d3.scale.linear()
+                                 .domain([0, 100])
+                                 .range([0, h]);
+
+            var axisScale = d3.scale.linear()
+                                 .domain([0, 100])
+                                 .range([h, 0]);
+
+            var xAxis = d3.svg.axis()
+                              .scale(xScale)
+                              .orient("bottom")
+                              .ticks(specificData.length)
+                              .tickFormat(function(d, i){
+                                              return countryNames[i]
+                                          });
+
+            var yAxis = d3.svg.axis()
+                              .scale(axisScale)
+                              .orient("left")
+                              .ticks(10);
+
+            // create SVG element
+            var svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w + (2 * widthMargin))
+                        .attr("height", h + (2 *heightMargin));
+
+            svg.selectAll("rect")
+               .data(specificData)
+               .enter()
+               .append("rect")
+               .attr("x", function(d, i) {
+                    return (i * (w / specificData.length)) + widthMargin;
+               })
+               .attr("y", function(d) {
+                    return h + heightMargin - yScale((d));
+               })
+               .attr("width", w / specificData.length - barPadding)
+               .attr("height", function(d) {
+                    return yScale(d);
+               })
+               .attr("fill", function(d) {
+                    return "rgb(" + (d * 10) + ", 0, 0)";
+               });
+
+            svg.selectAll("text")
+               .data(specificData)
+               .enter()
+               .append("text")
+               .text(function(d) {
+                    return d + "%";
+               })
+               .attr("x", function(d, i) {
+                    return i * (w / specificData.length) + widthMargin + 5;
+               })
+               .attr("y", function(d) {
+                    return h + heightMargin - yScale(d) - 1;
+               })
+               .attr("font-family", "sans-serif")
+               .attr("font-weight", "bold")
+               .attr("font-size", "11px")
+               .attr("fill", "black");
+
+            // create X axis
+            svg.append("g")
+                .attr("class","axis")
+                .attr("transform", "translate(0," + (h + heightMargin) + ")")
+                .call(xAxis)
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.10em")
+                .attr("dy", ".20em")
+                .attr("transform", "rotate(-65)")
+
+
+            //Create Y axis
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(" + widthMargin + "," +
+                       heightMargin + ")")
+                .call(yAxis);
+            });
+        </script>
+</html>

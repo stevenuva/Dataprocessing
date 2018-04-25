@@ -14,4 +14,5 @@ with open(csv_filename, "r") as csv_file:
 
 # write csv list into a json file
 with open(json_filename, "w") as json_file:
-    json.dump(csv_list, json_file)
+    data_dic = {"data": csv_list}
+    json.dump(data_dic, json_file)
