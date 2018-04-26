@@ -1,9 +1,22 @@
 body {
-    color: navy;
+    height: 100%;
+        background-image: url(http://jewishjournal.com/wp-content/uploads/2018/01/Child_survivors_of_Auschwitz.jpeg);
+
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    margin: 0;
+    color: #FFFFFF;
     font-family: "Times New Roman";
     font-weight:bold;
-    text-align: center;
-    background-image: url(http://jewishjournal.com/wp-content/uploads/2018/01/Child_survivors_of_Auschwitz.jpeg);
+
+}
+
+h1, h2, h3, h4{
+        background-color: rgba(0, 0, 0, 1);
 }
 
 svg{
@@ -56,8 +69,7 @@ svg text{
   left: 0;
 }
 
-
-
-
-
-
+div{
+  text-align: left;
+  background-color: rgba(9, 49, 69, 0.6);
+}
