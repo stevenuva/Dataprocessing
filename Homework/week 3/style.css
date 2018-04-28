@@ -1,35 +1,35 @@
+/* source full image: https://www.w3schools.com/howto/howto_css_full_page.asp*/
 body {
-    height: 100%;
-        background-image: url(http://jewishjournal.com/wp-content/uploads/2018/01/Child_survivors_of_Auschwitz.jpeg);
-
-
-    /* Center and scale the image nicely */
+    background-image: url(http://jewishjournal.com/wp-content/uploads/2018/01/Child_survivors_of_Auschwitz.jpeg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    text-align: center;
-    margin: 0;
+    height: 100%;
+
     color: #FFFFFF;
+    margin: 0;
     font-family: "Times New Roman";
     font-weight:bold;
-
+    text-align: center;
 }
 
-h1, h2, h3, h4{
-        background-color: rgba(0, 0, 0, 1);
+div {
+    text-align: center;
+    background-color: rgba(9, 49, 69, 0.6);
 }
 
-svg{
-        background-color: rgba(183, 181, 154, 0.9);
-    }
+svg {
+    background-color: rgba(183, 181, 154, 0.9);
+}
 
-svg text{
+svg text {
     font-size:11px;
     font-family:sans-serif;
     font-weight:bold;
     fill:black;
 }
 
+/* source css below: http://bl.ocks.org/Caged/6476579*/
 .axis path,
 .axis line {
     fill: none;
@@ -37,7 +37,7 @@ svg text{
     shape-rendering: crispEdges;
 }
 
-.bar:hover{
+.bar:hover {
     fill: black;
 }
 
@@ -50,7 +50,7 @@ svg text{
   border-radius: 2px;
 }
 
-/* Creates a small triangle extender for the tooltip */
+/* creates a small triangle extender for the tooltip */
 .d3-tip:after {
   box-sizing: border-box;
   display: inline;
@@ -62,14 +62,12 @@ svg text{
   position: absolute;
   text-align: center;
 }
-/* Style northward tooltips differently */
+
+/* style northward tooltips differently */
 .d3-tip.n:after {
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
 }
 
-div{
-  text-align: left;
-  background-color: rgba(9, 49, 69, 0.6);
-}
+

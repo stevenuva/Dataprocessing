@@ -4,135 +4,16 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="style.css">
         <title>Jewish victims World War 2 per country</title>
-        <script src="d3/d3.v3.js"></script>
-        <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <script src="d3/d3.v3.min.js"></script>
+        <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js">
+        </script>
     </head>
 
     <body>
-        <h1>Jewish casualties per country during WW2 in percentages</h1>
-        <h3>Steven Kuhnen (10305882)</h3>
-        <h4>Dataprocessing week 3: Bar chart</h4>
-        <script type="text/javascript">
+        <div></div>
+        <script src="bar.js" type="text/javascript"></script>
 
-            //Width and height and padding
-            var w = 800;
-            var h = 400;
-            var barPadding = 1;
-            var heightMargin = 100;
-            var widthMargin = 40;
-
-            d3.json("Jewish_Victims_WW2.json", function(data){
-            var completeData = Object.values(data)[0]
-            completeData.sort(function(x, y){
-                return d3.descending(x["Average%"], y["Average%"]);
-            })
-
-            var countryNames = completeData.map(function(d){
-              return d["Country"];
-            });
-
-            var specificData = completeData.map(function(d) {
-                return d["Average%"].replace(/(%)/, "");
-            });
-
-            // create x scale
-           var xScale = d3.scale.linear()
-                                .domain([0, specificData.length])
-                                .range([widthMargin, w + widthMargin]);
-
-            // create y scale
-            var yScale = d3.scale.linear()
-                                 .domain([0, 100])
-                                 .range([0, h]);
-
-            var axisScale = d3.scale.linear()
-                                 .domain([0, 100])
-                                 .range([h, 0]);
-
-            var xAxis = d3.svg.axis()
-                              .scale(xScale)
-                              .orient("bottom")
-                              .ticks(specificData.length)
-                              .tickFormat(function(d, i){
-                                              return countryNames[i]
-                                          });
-
-            var yAxis = d3.svg.axis()
-                              .scale(axisScale)
-                              .orient("left")
-                              .ticks(10);
-            var tip = d3.tip()
-              .attr('class', 'd3-tip')
-              .offset([-20, 0])
-              .html(function(d, i) {
-                return "<strong>" + countryNames[i] + ":</strong> <span style='color:red'>" + specificData[i]+ "%</span>";
-              })
-            // create SVG element
-            var svg = d3.select("body")
-                        .append("svg")
-                        .attr("width", w + (2 * widthMargin))
-                        .attr("height", h + (2 *heightMargin));
-
-            svg.call(tip);
-
-            svg.selectAll("rect")
-                .data(specificData)
-              .enter().append("rect")
-               .attr("class", "bar")
-               .attr("x", function(d, i) {
-                    return (i * (w / specificData.length)) + widthMargin;
-               })
-               .attr("width", w / specificData.length - barPadding)
-               .attr("y", function(d) {
-                    return h + heightMargin - yScale((d));
-               })
-               .attr("height", function(d) {
-                    return yScale(d);
-               })
-               .attr("fill", function(d) {
-                   return "rgb(" + (Math.round(255 - d)) + ", 0, 0)";
-                 })
-               .on("mouseover", tip.show)
-               .on("mouseover", tip.show)
-
-
-            svg.selectAll("text")
-               .data(specificData)
-               .enter()
-               .append("text")
-               .transition().duration(h)
-               .delay(function(d, i){
-                return i * heightMargin;
-              })
-               .text(function(d) {
-                    return d + "%";
-               })
-               .attr("x", function(d, i) {
-                    return i * (w / specificData.length) + widthMargin + 5;
-               })
-               .attr("y", function(d) {
-                    return h + heightMargin - yScale(d) - 1;
-               });
-
-            // create X axis
-            svg.append("g")
-                .attr("class","axis")
-                .attr("transform", "translate(0," + (h + heightMargin) + ")")
-                .call(xAxis)
-                .selectAll("text")
-                .style("text-anchor", "end")
-                .attr("dx", "-.10em")
-                .attr("dy", ".70em")
-                .attr("transform", "rotate(-65)")
-
-
-            // create Y axis
-            svg.append("g")
-                .attr("class", "axis")
-                .attr("transform", "translate(" + widthMargin + "," +
-                       heightMargin + ")")
-                .call(yAxis);
-            });
-        </script>
-        <!-- <iframe width="0" height="0" src="https://www.youtube.com/embed/XNSsv86lsok?autoplay=1" ></iframe> -->
+        <!-- adds schindlers list soundtrack to the html page -->
+        <iframe width="0" height="0" src="https://www.youtube.com/embed/XNSsv86lsok?autoplay=1" >
+        </iframe>
 </html>

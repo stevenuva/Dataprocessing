@@ -1,3 +1,8 @@
+# Week 3
+# Name: Steven Kuhnen (10305882)
+#
+# Converts a csv file to a json file
+
 import csv
 import json
 
