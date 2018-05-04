@@ -1,0 +1,22 @@
+svg {
+    background-color:#CAE1FF;
+}
+
+body {
+    background-image: url(https://images.medicaldaily.com/sites/medicaldaily.com/files/2014/05/18/experts-want-overhaul-how-we-measure-gdp.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+
+    color: #FFFFFF;
+    margin: 0;
+    font-family: "Times New Roman";
+    font-weight:bold;
+    text-align: center;
+}
+
+.readable {
+    text-align: center;
+    background-color: rgba(9, 49, 69, 0.9);
+}
