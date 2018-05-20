@@ -1,58 +1,52 @@
-svg {
-    background-color: white;
-}
+/**
+ *    Steven Kuhnen (10305882)
+ *    Data Processing: week 5 (Linked views)
+ *    europeanHealth.css
+ *
+ *    Stylesheet for europeanHealth.html
+ */
 
-body{
+body {
     background-image: url(https://www.rd.com/wp-content/uploads/2016/10/01_clear_signs_unhealthy_gut_slide_1_cyano66.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
     height: 100%;
 }
 
-h1, #title {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: black;
-    font-size: 18px;
-    font-family: sans-serif;
+svg {
+    background-color: white;
+}
+
+h3 {
+    font-size: 12px;
     font-weight: bold;
     margin: 0;
     padding-bottom: 10px;
     text-align: center
 }
 
-#map {
-    float: left;
-    width: 700px;
+#bar, #map {
+    background-color: white;
+    box-shadow: 1px 1px 1px 2px rgb(217, 217, 217);
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
     padding: 20px;
-    background-color: white;
-    box-shadow: 1px 1px 1px 2px rgb(217, 217, 217);
+    width: 650px;
 }
 
-#bar {
-    float: left;
-    width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 1px 1px 1px 2px rgb(217, 217, 217);
-}
-
-path:hover {
-    fill: orange;
+path:hover, .bar:hover {
     cursor:pointer;
+    fill: #fb8072;
 }
 
 .axis path,
 .axis line {
     fill: none;
-    stroke: black;
     shape-rendering: crispEdges;
+    stroke: black;
 }
 
 .axis text {
@@ -61,39 +55,37 @@ path:hover {
 }
 
 .bar {
-    fill: rgba(8, 81, 156, 0.6);
+    fill: #1f78b4;
+    stroke: black;
 }
 
-.bar:hover {
-    fill: orange;
-    cursor: pointer;
+.label {
+    font-weight: bold;
+    text-anchor: end;
+    font-size: 22px;
+    fill: black;
 }
 
-.d3-tip {
-  line-height: 1;
-  font-weight: bold;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 2px;
+.storytime {
+    background-color: black;
+    box-shadow: 1px 1px 1px 2px black;
+    color:white;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 650px;
 }
 
-/* Creates a small triangle extender for the tooltip */
-.d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
-}
-
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
+.toolTip {
+    background: #ffffb3;
+    border: 3px solid black;
+    color: black;
+    display: none;
+    font-weight: bold;
+    font-size: 18px;
+    height: auto;
+    min-width: 80px;
+    padding: 14px;
+    position: absolute;
+    text-align: center;
 }

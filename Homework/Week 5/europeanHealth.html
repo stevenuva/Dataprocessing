@@ -1,32 +1,125 @@
-<!DOCTYPE html>
-  <html lang="en">
-     <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="europeanHealth.css">
-        <script src="https:/d3js.org/topojson.v1.min.js"></script>
-        <script src="https://d3js.org/d3.v3.min.js"></script>
-        <script src="https://d3js.org/d3.v4.min.js"></script>
-        <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-        <script src="europeanHealth.js" type="text/javascript"></script>
-        <title>EU Life expectancy versus health expenditure (2015)</title>
-    </head>
+<!--
+    Steven Kuhnen (10305882)
+    dataprocessing week 5 (linked views)
+    europeanHealth.html
 
-    <body>
-      <div id="title">
-        <h2>Data Processing: Linked views (week 5)</h1>
-        <h3>Steven Kuhnen (10305882)</h2>
-        <h4>Life expectancy</h3>
-        <h5>Source: OECD:
-            <a href="https://data.oecd.org/healthstat/life-expectancy-at-birth.htm">Life expectancy,</a>
-            <a href="https://data.oecd.org/healthres/health-spending.htm"> Health expenditure</a>
-        </h4>
-        <h4>unable to add tip box inside the svg element!!!</h4>
-      </div>
-      <div id="map">
-        <h1>Health Expenditure Members European Union (2015)</h1>
-      </div>
-      <div id="bar">
-        <h1>Life Expactancy (Male, Female and Combined) (2015)</h1>
-      </div>
-    </body>
-  </html>
+    html page that contains a map and a barchart which are linked together
+    the map of Europe gives information about health expenditure in the EU
+    the bar chart shows the corresponding life expectancy of a country on the map
+-->
+
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!-- link to external sheets for style -->
+            <link rel="shortcut icon" href="/image/favicon.png">
+            <link rel="stylesheet" type="text/css" href="europeanHealth.css">
+            <link rel="stylesheet bootstrap" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <!-- import necessary libraries -->
+            <script src="https://d3js.org/topojson.v1.min.js"></script>
+            <script src="https://d3js.org/d3.v3.min.js"></script>
+            <script src="https://d3js.org/d3.v4.min.js"></script>
+            <script src="europeanHealth.js"></script>
+            <!--
+                source bootstrap: https://getbootstrap.com/docs/3.3/getting-started/
+                jQuery library
+            -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <title>EU Life expectancy versus health expenditure (2015)</title>
+        </head>
+
+        <body>
+            <!-- creating a jumbotron which contains the page header -->
+            <div class="jumbotron text-center">
+                <h1>Data Processing: Linked views (week 5)</h1>
+                <h2>Steven Kuhnen (10305882)</h2>
+                <h3>Life expectancy versus Health Expenditure</h3>
+                <h5>Source: OECD:
+                    <a href="https://data.oecd.org/healthstat/life-expectancy-at-birth.htm">
+                        Life expectancy,
+                    </a>
+                    <a href="https://data.oecd.org/healthres/health-spending.htm">
+                        Health expenditure
+                    </a>
+                </h5>
+                <p>
+                    This website allows you to see if their might be a
+                    correlation between the healt expenditure of a country and
+                    the life expectancy at birth of its population.
+                </p>
+            </div>
+            <!-- create dropdown menu -->
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    Select Expenditure Measurements
+                <span class="caret"></span></button>
+                <!--
+                    list with options for the dropdownmenu
+                    onclick calls a function that changes the map
+                -->
+                <ul class="dropdown-menu dropdown-menu-center" role="menu" aria-labelledby="menu1">
+                    <li role="presentation">
+                        <a role="menuitem" onclick="updateMapDollars()" href="#">
+                            US dollars/capita
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" onclick="updateMapGdp()" href="#">
+                            % of GDP
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--
+                ensure full width of the viewport is being used
+                source: https://www.w3schools.com/bootstrap/bootstrap_get_started.asp
+            -->
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- div containing the map svg and its textbox -->
+                    <div class="col-sm-6">
+                        <div id="map">
+                            <h3 id="maptitle">
+                                Health Expenditure Members European Union in US
+                                dollars/capita(2015)
+                            </h3>
+                            <!-- div to place the legend -->
+                            <div id="legend"></div>
+                        </div>
+                        <p class="storytime">
+                            The map above gives information about
+                            the total health expenditure of every country in the
+                            European Union. Hover over the map to see how much
+                            dollar or what (rounded) percentage of the Gross
+                            domestic product (GDP) a specific country spends
+                            on its healtcare. The barchart will also show more
+                            information about a specific country when you hover
+                            over that country in the map. Note that non-EU
+                            countries are left out.
+                        </p>
+                    </div>
+                    <!-- div containing the bar chart svg and its textbox -->
+                    <div class="col-sm-6">
+                        <div id="bar">
+                            <h3 id="bartitle">
+                                Life Expactancy at Birth (Male, Female and
+                                Combined) (2015)
+                            </h3>
+                        </div>
+                        <p class="storytime">The bar chart above shows the life
+                            expectancy at birth in years for a specific country.
+                            The life expectancy is shown for the male and the
+                            female population, as well as the life expectancy
+                            of the total population. Hover over each bar to see
+                            the exact age which is represented by each bar
+                            seperately.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
