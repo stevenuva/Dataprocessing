@@ -12,11 +12,9 @@
 var w = 600;
 var h = 400;
 
-var jsonData = [];
-var countries = [];
-var healthExpenditureDollars = [];
-var healthExpenditureGdp = [];
-var lifeExpectancy = [];
+// global arrays needed to make different functions work properly
+var jsonData = [], countries = [], healthExpenditureDollars = [],
+healthExpenditureGdp = [], lifeExpectancy = [];
 
 // call function load data when page is loaded
 window.onload = function() {
