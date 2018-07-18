@@ -1,5 +1,5 @@
-# dataprocessing
+# Dataprocessing (minor-programmeren)
 
 Steven Kuhnen,
-[My Github Page](https://stevenuva.github.io/dataprocessing/)
+[My projects](https://stevenuva.github.io/dataprocessing/)
 
